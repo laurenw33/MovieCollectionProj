@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class MovieCollection
@@ -171,16 +172,36 @@ public class MovieCollection
         searchTerm = searchTerm.toLowerCase();
 
         // arraylist to hold search results
-        ArrayList<Movie> results = new ArrayList<Movie>();
         ArrayList<String> castMembers = new ArrayList<>();
+        ArrayList<String> peopleWSearchTerm = new ArrayList<>();
+
+
         for (Movie movie : movies) {
             String[] castArray = movie.getCast().split("\\|");
             for (String member : castArray) {
                 castMembers.add(member.trim().toLowerCase());
             }
+
+//            for (String member : castMembers) {
+//                if (member.contains(searchTerm)) {
+//                    for (int i = 0; i < peopleWSearchTerm.size(); i ++) {
+//                        if (!member.equals(peopleWSearchTerm.get(i))) {
+//                            peopleWSearchTerm.add(member);
+//                        }
+//
+//                    }
+//                }
+//            }
+
+            for (String member : castMembers) {
+                if (member.contains(searchTerm) && !peopleWSearchTerm.contains(member)) {
+                    peopleWSearchTerm.add(member);
+                }
+            }
+
+            System.out.println(peopleWSearchTerm);
+
         }
-
-
 
     }
 
