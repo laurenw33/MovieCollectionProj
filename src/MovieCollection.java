@@ -163,46 +163,92 @@ public class MovieCollection
         System.out.println("Box office revenue: " + movie.getRevenue());
     }
 
-    private void searchCast()
-    {
+    private void searchCast() {
         System.out.print("Enter a cast search term: ");
-        String searchTerm = scanner.nextLine();
+        String searchTerm = scanner.nextLine().toLowerCase();
 
-        // prevent case sensitivity
-        searchTerm = searchTerm.toLowerCase();
-
-        // arraylist to hold search results
-        ArrayList<String> castMembers = new ArrayList<>();
         ArrayList<String> peopleWSearchTerm = new ArrayList<>();
-
 
         for (Movie movie : movies) {
             String[] castArray = movie.getCast().split("\\|");
+
             for (String member : castArray) {
-                castMembers.add(member.trim().toLowerCase());
-            }
+                member = member.trim().toLowerCase();
 
-//            for (String member : castMembers) {
-//                if (member.contains(searchTerm)) {
-//                    for (int i = 0; i < peopleWSearchTerm.size(); i ++) {
-//                        if (!member.equals(peopleWSearchTerm.get(i))) {
-//                            peopleWSearchTerm.add(member);
-//                        }
-//
-//                    }
-//                }
-//            }
-
-            for (String member : castMembers) {
+                // Add member if it contains searchTerm and is not already in the list
                 if (member.contains(searchTerm) && !peopleWSearchTerm.contains(member)) {
                     peopleWSearchTerm.add(member);
                 }
             }
-
-            System.out.println(peopleWSearchTerm);
-
         }
 
+        sortCast(peopleWSearchTerm);
+
+        for (int i = 0; i < peopleWSearchTerm.size(); i++)
+        {
+            String title = peopleWSearchTerm.get(i);
+            int choiceNum = i + 1;
+
+            System.out.println("" + choiceNum + ". " + title);
+        }
+
+        System.out.println("Which cast member would you like to learn more about?");
+        System.out.print("Enter number: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        String selectedCast = peopleWSearchTerm.get(choice - 1);
+        ArrayList<String> moviesWCast = new ArrayList<>();
+
+
+        for (Movie m : movies) {
+            String[] castArray = m.getCast().split("\\|"); // Split cast into an array
+
+            for (String member : castArray) {
+                if (member.trim().equalsIgnoreCase(selectedCast)) { // Exact match (case insensitive)
+                    moviesWCast.add(m.getTitle());
+                }
+            }
+        }
+
+        for (int i = 0; i < moviesWCast.size(); i++)
+        {
+            String title = moviesWCast.get(i);
+            int choiceNum = i + 1;
+
+            System.out.println("" + choiceNum + ". " + title);
+        }
+        System.out.println("Which movie would you like to learn more about?");
+        System.out.print("Enter number: ");
+
+        int movieSelect = scanner.nextInt();
+        scanner.nextLine();
+
+        String selectedMovie = moviesWCast.get(movieSelect - 1);
+
+        for (Movie m : movies) {
+            if (m.getTitle().toLowerCase().contains(selectedMovie.toLowerCase())) {
+                displayMovieInfo(m);
+                break;
+            }
+        }
+
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
+    }
+
+    private void sortCast(ArrayList<String> listToSort) {
+        for (int j = 1; j < listToSort.size(); j++) {
+            String temp = listToSort.get(j);
+
+            int possibleIndex = j;
+            while (possibleIndex > 0 && temp.compareTo(listToSort.get(possibleIndex - 1)) < 0) {
+                listToSort.set(possibleIndex, listToSort.get(possibleIndex - 1));
+                possibleIndex--;
+            }
+            listToSort.set(possibleIndex, temp);
+        }
     }
 
     private void searchKeywords()
