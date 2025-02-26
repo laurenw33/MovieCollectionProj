@@ -367,11 +367,10 @@ public class MovieCollection
 
     private void sortRating(ArrayList<Movie> listToSort) {
         for (int j = 1; j < listToSort.size(); j++) {
-            double temp = listToSort.get(j).getUserRating();// The number to insert
+            double temp = listToSort.get(j).getUserRating();
             Movie m = listToSort.get(j);
             int possibleIndex = j;
 
-            // Shift elements to the right until we find the correct position
             while (possibleIndex > 0 && temp < listToSort.get(possibleIndex - 1).getUserRating()) {
                 listToSort.set(possibleIndex, listToSort.get(possibleIndex - 1));
                 possibleIndex--;
@@ -383,11 +382,10 @@ public class MovieCollection
 
     private void sortRevenue(ArrayList<Movie> listToSort) {
         for (int j = 1; j < listToSort.size(); j++) {
-            double temp = listToSort.get(j).getRevenue();// The number to insert
+            double temp = listToSort.get(j).getRevenue();
             Movie m = listToSort.get(j);
             int possibleIndex = j;
 
-            // Shift elements to the right until we find the correct position
             while (possibleIndex > 0 && temp < listToSort.get(possibleIndex - 1).getRevenue()) {
                 listToSort.set(possibleIndex, listToSort.get(possibleIndex - 1));
                 possibleIndex--;
