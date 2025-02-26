@@ -402,7 +402,7 @@ public class MovieCollection
 
         sortRating(temp);
 
-        for (int i = temp.size() - 1; i > temp.size() - 50; i--) {
+        for (int i = temp.size() - 1; i > temp.size() - 51; i--) {
             top50.add(temp.get(i));
         }
 
@@ -431,7 +431,7 @@ public class MovieCollection
 
         sortRevenue(temp);
 
-        for (int i = temp.size() - 1; i > temp.size() - 50; i--) {
+        for (int i = temp.size() - 1; i > temp.size() - 51; i--) {
             top50.add(temp.get(i));
         }
 
