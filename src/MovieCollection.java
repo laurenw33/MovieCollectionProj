@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class MovieCollection
@@ -182,7 +181,7 @@ public class MovieCollection
             }
         }
 
-        sortCast(peopleWSearchTerm);
+        sortString(peopleWSearchTerm);
 
         for (int i = 0; i < peopleWSearchTerm.size(); i++)
         {
@@ -238,7 +237,7 @@ public class MovieCollection
         scanner.nextLine();
     }
 
-    private void sortCast(ArrayList<String> listToSort) {
+    private void sortString(ArrayList<String> listToSort) {
         for (int j = 1; j < listToSort.size(); j++) {
             String temp = listToSort.get(j);
 
@@ -305,7 +304,66 @@ public class MovieCollection
 
     private void listGenres()
     {
+        ArrayList<String> listOfUniqueGenres = new ArrayList<>();
 
+        for (Movie movie : movies) {
+            String[] genreArray = movie.getGenres().split("\\|");
+
+            for (String genre : genreArray) {
+                genre = genre.trim().toLowerCase();
+
+                // Add genre if it contains searchTerm and is not already in the list
+                if (!listOfUniqueGenres.contains(genre)) {
+                    listOfUniqueGenres.add(genre);
+                }
+            }
+        }
+
+        sortString(listOfUniqueGenres);
+
+        for (int i = 0; i < listOfUniqueGenres.size(); i++)
+        {
+            String title = listOfUniqueGenres.get(i);
+            int choiceNum = i + 1;
+
+            System.out.println("" + choiceNum + ". " + title);
+        }
+
+        System.out.println("Which genre would you like to learn more about?");
+        System.out.print("Enter number: ");
+
+        int genreSelect = scanner.nextInt();
+        scanner.nextLine();
+
+        String selectedGenre = listOfUniqueGenres.get(genreSelect - 1);
+
+        ArrayList<Movie> moviesWSelectedGenre = new ArrayList<>();
+
+        for (Movie m : movies) {
+            if (m.getGenres().toLowerCase().contains(selectedGenre.toLowerCase())) {
+                moviesWSelectedGenre.add(m);
+            }
+        }
+
+        for (int i = 0; i < moviesWSelectedGenre.size(); i++)
+        {
+            String title = moviesWSelectedGenre.get(i).getTitle();
+            int choiceNum = i + 1;
+
+            System.out.println("" + choiceNum + ". " + title);
+        }
+
+        System.out.println("Which movie would you like to learn more about?");
+        System.out.print("Enter number: ");
+
+        int movieSelect = scanner.nextInt();
+        scanner.nextLine();
+
+        Movie selected = moviesWSelectedGenre.get(movieSelect - 1);
+        displayMovieInfo(selected);
+
+        System.out.println("\n ** Press Enter to Return to Main Menu **");
+        scanner.nextLine();
     }
 
     private void listHighestRated()

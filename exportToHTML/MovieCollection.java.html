@@ -1,0 +1,333 @@
+<html>
+<head>
+<title>MovieCollection.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+MovieCollection.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">BufferedReader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">FileReader</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">io</span><span class="s2">.</span><span class="s1">IOException</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Objects</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Scanner</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">MovieCollection</span>
+<span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Movie</span><span class="s2">&gt; </span><span class="s1">movies</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Scanner scanner</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">MovieCollection</span><span class="s2">(</span><span class="s1">String fileName</span><span class="s2">)</span>
+    <span class="s2">{</span>
+        <span class="s1">importMovieList</span><span class="s2">(</span><span class="s1">fileName</span><span class="s2">);</span>
+        <span class="s1">scanner </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">in</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Movie</span><span class="s2">&gt; </span><span class="s1">getMovies</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s0">return </span><span class="s1">movies</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">public void </span><span class="s1">menu</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">String menuOption </span><span class="s2">= </span><span class="s3">&quot;&quot;</span><span class="s2">;</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Welcome to the movie collection!&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Total: &quot; </span><span class="s2">+ </span><span class="s1">movies</span><span class="s2">.</span><span class="s1">size</span><span class="s2">() + </span><span class="s3">&quot; movies&quot;</span><span class="s2">);</span>
+
+        <span class="s0">while </span><span class="s2">(!</span><span class="s1">menuOption</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;q&quot;</span><span class="s2">))</span>
+        <span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;------------ Main Menu ----------&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;- search (t)itles&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;- search (k)eywords&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;- search (c)ast&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;- see all movies of a (g)enre&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;- list top 50 (r)ated movies&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;- list top 50 (h)igest revenue movies&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;- (q)uit&quot;</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Enter choice: &quot;</span><span class="s2">);</span>
+            <span class="s1">menuOption </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(!</span><span class="s1">menuOption</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;q&quot;</span><span class="s2">))</span>
+            <span class="s2">{</span>
+                <span class="s1">processOption</span><span class="s2">(</span><span class="s1">menuOption</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">processOption</span><span class="s2">(</span><span class="s1">String option</span><span class="s2">)</span>
+    <span class="s2">{</span>
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">option</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;t&quot;</span><span class="s2">))</span>
+        <span class="s2">{</span>
+            <span class="s1">searchTitles</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">else if </span><span class="s2">(</span><span class="s1">option</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;c&quot;</span><span class="s2">))</span>
+        <span class="s2">{</span>
+            <span class="s1">searchCast</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">else if </span><span class="s2">(</span><span class="s1">option</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;k&quot;</span><span class="s2">))</span>
+        <span class="s2">{</span>
+            <span class="s1">searchKeywords</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">else if </span><span class="s2">(</span><span class="s1">option</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;g&quot;</span><span class="s2">))</span>
+        <span class="s2">{</span>
+            <span class="s1">listGenres</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">else if </span><span class="s2">(</span><span class="s1">option</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;r&quot;</span><span class="s2">))</span>
+        <span class="s2">{</span>
+            <span class="s1">listHighestRated</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">else if </span><span class="s2">(</span><span class="s1">option</span><span class="s2">.</span><span class="s1">equals</span><span class="s2">(</span><span class="s3">&quot;h&quot;</span><span class="s2">))</span>
+        <span class="s2">{</span>
+            <span class="s1">listHighestRevenue</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">else</span>
+        <span class="s2">{</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Invalid choice!&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">searchTitles</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Enter a title search term: &quot;</span><span class="s2">);</span>
+        <span class="s1">String searchTerm </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s4">// prevent case sensitivity</span>
+        <span class="s1">searchTerm </span><span class="s2">= </span><span class="s1">searchTerm</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">();</span>
+
+        <span class="s4">// arraylist to hold search results</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Movie</span><span class="s2">&gt; </span><span class="s1">results </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Movie</span><span class="s2">&gt;();</span>
+
+        <span class="s4">// search through ALL movies in collection</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">movies</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++)</span>
+        <span class="s2">{</span>
+            <span class="s1">String movieTitle </span><span class="s2">= </span><span class="s1">movies</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">).</span><span class="s1">getTitle</span><span class="s2">();</span>
+            <span class="s1">movieTitle </span><span class="s2">= </span><span class="s1">movieTitle</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">movieTitle</span><span class="s2">.</span><span class="s1">indexOf</span><span class="s2">(</span><span class="s1">searchTerm</span><span class="s2">) != -</span><span class="s5">1</span><span class="s2">)</span>
+            <span class="s2">{</span>
+                <span class="s4">//add the Movie objest to the results list</span>
+                <span class="s1">results</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">movies</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">));</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s4">// sort the results by title</span>
+        <span class="s1">sortResults</span><span class="s2">(</span><span class="s1">results</span><span class="s2">);</span>
+
+        <span class="s4">// now, display them all to the user</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">results</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++)</span>
+        <span class="s2">{</span>
+            <span class="s1">String title </span><span class="s2">= </span><span class="s1">results</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">).</span><span class="s1">getTitle</span><span class="s2">();</span>
+
+            <span class="s4">// this will print index 0 as choice 1 in the results list; better for user!</span>
+            <span class="s0">int </span><span class="s1">choiceNum </span><span class="s2">= </span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;&quot; </span><span class="s2">+ </span><span class="s1">choiceNum </span><span class="s2">+ </span><span class="s3">&quot;. &quot; </span><span class="s2">+ </span><span class="s1">title</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Which movie would you like to learn more about?&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Enter number: &quot;</span><span class="s2">);</span>
+
+        <span class="s0">int </span><span class="s1">choice </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">();</span>
+        <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s1">Movie selectedMovie </span><span class="s2">= </span><span class="s1">results</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">choice </span><span class="s2">- </span><span class="s5">1</span><span class="s2">);</span>
+
+        <span class="s1">displayMovieInfo</span><span class="s2">(</span><span class="s1">selectedMovie</span><span class="s2">);</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n </span><span class="s3">** Press Enter to Return to Main Menu **&quot;</span><span class="s2">);</span>
+        <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">sortResults</span><span class="s2">(</span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Movie</span><span class="s2">&gt; </span><span class="s1">listToSort</span><span class="s2">)</span>
+    <span class="s2">{</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">j </span><span class="s2">= </span><span class="s5">1</span><span class="s2">; </span><span class="s1">j </span><span class="s2">&lt; </span><span class="s1">listToSort</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">j</span><span class="s2">++)</span>
+        <span class="s2">{</span>
+            <span class="s1">Movie temp </span><span class="s2">= </span><span class="s1">listToSort</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">j</span><span class="s2">);</span>
+            <span class="s1">String tempTitle </span><span class="s2">= </span><span class="s1">temp</span><span class="s2">.</span><span class="s1">getTitle</span><span class="s2">();</span>
+
+            <span class="s0">int </span><span class="s1">possibleIndex </span><span class="s2">= </span><span class="s1">j</span><span class="s2">;</span>
+            <span class="s0">while </span><span class="s2">(</span><span class="s1">possibleIndex </span><span class="s2">&gt; </span><span class="s5">0 </span><span class="s2">&amp;&amp; </span><span class="s1">tempTitle</span><span class="s2">.</span><span class="s1">compareTo</span><span class="s2">(</span><span class="s1">listToSort</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">possibleIndex </span><span class="s2">- </span><span class="s5">1</span><span class="s2">).</span><span class="s1">getTitle</span><span class="s2">()) &lt; </span><span class="s5">0</span><span class="s2">)</span>
+            <span class="s2">{</span>
+                <span class="s1">listToSort</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">possibleIndex</span><span class="s2">, </span><span class="s1">listToSort</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">possibleIndex </span><span class="s2">- </span><span class="s5">1</span><span class="s2">));</span>
+                <span class="s1">possibleIndex</span><span class="s2">--;</span>
+            <span class="s2">}</span>
+            <span class="s1">listToSort</span><span class="s2">.</span><span class="s1">set</span><span class="s2">(</span><span class="s1">possibleIndex</span><span class="s2">, </span><span class="s1">temp</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">displayMovieInfo</span><span class="s2">(</span><span class="s1">Movie movie</span><span class="s2">)</span>
+    <span class="s2">{</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">();</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Title: &quot; </span><span class="s2">+ </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getTitle</span><span class="s2">());</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Tagline: &quot; </span><span class="s2">+ </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getTagline</span><span class="s2">());</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Runtime: &quot; </span><span class="s2">+ </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getRuntime</span><span class="s2">() + </span><span class="s3">&quot; minutes&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Year: &quot; </span><span class="s2">+ </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getYear</span><span class="s2">());</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Directed by: &quot; </span><span class="s2">+ </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getDirector</span><span class="s2">());</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Cast: &quot; </span><span class="s2">+ </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getCast</span><span class="s2">());</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Overview: &quot; </span><span class="s2">+ </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getOverview</span><span class="s2">());</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;User rating: &quot; </span><span class="s2">+ </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getUserRating</span><span class="s2">());</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Box office revenue: &quot; </span><span class="s2">+ </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getRevenue</span><span class="s2">());</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">searchCast</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Enter a cast search term: &quot;</span><span class="s2">);</span>
+        <span class="s1">String searchTerm </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s4">// prevent case sensitivity</span>
+        <span class="s1">searchTerm </span><span class="s2">= </span><span class="s1">searchTerm</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">();</span>
+
+        <span class="s4">// arraylist to hold search results</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">castMembers </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">peopleWSearchTerm </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+
+
+        <span class="s0">for </span><span class="s2">(</span><span class="s1">Movie movie </span><span class="s2">: </span><span class="s1">movies</span><span class="s2">) {</span>
+            <span class="s1">String</span><span class="s2">[] </span><span class="s1">castArray </span><span class="s2">= </span><span class="s1">movie</span><span class="s2">.</span><span class="s1">getCast</span><span class="s2">().</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\\</span><span class="s3">|&quot;</span><span class="s2">);</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">String member </span><span class="s2">: </span><span class="s1">castArray</span><span class="s2">) {</span>
+                <span class="s1">castMembers</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">member</span><span class="s2">.</span><span class="s1">trim</span><span class="s2">().</span><span class="s1">toLowerCase</span><span class="s2">());</span>
+            <span class="s2">}</span>
+
+<span class="s4">//            for (String member : castMembers) {</span>
+<span class="s4">//                if (member.contains(searchTerm)) {</span>
+<span class="s4">//                    for (int i = 0; i &lt; peopleWSearchTerm.size(); i ++) {</span>
+<span class="s4">//                        if (!member.equals(peopleWSearchTerm.get(i))) {</span>
+<span class="s4">//                            peopleWSearchTerm.add(member);</span>
+<span class="s4">//                        }</span>
+<span class="s4">//</span>
+<span class="s4">//                    }</span>
+<span class="s4">//                }</span>
+<span class="s4">//            }</span>
+
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">String member </span><span class="s2">: </span><span class="s1">castMembers</span><span class="s2">) {</span>
+                <span class="s0">if </span><span class="s2">(</span><span class="s1">member</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s1">searchTerm</span><span class="s2">) &amp;&amp; !</span><span class="s1">peopleWSearchTerm</span><span class="s2">.</span><span class="s1">contains</span><span class="s2">(</span><span class="s1">member</span><span class="s2">)) {</span>
+                    <span class="s1">peopleWSearchTerm</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">member</span><span class="s2">);</span>
+                <span class="s2">}</span>
+            <span class="s2">}</span>
+
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">peopleWSearchTerm</span><span class="s2">);</span>
+
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">searchKeywords</span><span class="s2">()</span>
+    <span class="s2">{</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Enter keyword search term: &quot;</span><span class="s2">);</span>
+        <span class="s1">String searchTerm </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s4">// prevent case sensitivity</span>
+        <span class="s1">searchTerm </span><span class="s2">= </span><span class="s1">searchTerm</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">();</span>
+
+        <span class="s4">// arraylist to hold search results</span>
+        <span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Movie</span><span class="s2">&gt; </span><span class="s1">results </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Movie</span><span class="s2">&gt;();</span>
+
+        <span class="s4">// search through ALL movies in collection</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">movies</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++)</span>
+        <span class="s2">{</span>
+            <span class="s1">String movieKeyword </span><span class="s2">= </span><span class="s1">movies</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">).</span><span class="s1">getKeywords</span><span class="s2">();</span>
+            <span class="s1">movieKeyword </span><span class="s2">= </span><span class="s1">movieKeyword</span><span class="s2">.</span><span class="s1">toLowerCase</span><span class="s2">();</span>
+
+            <span class="s0">if </span><span class="s2">(</span><span class="s1">movieKeyword</span><span class="s2">.</span><span class="s1">indexOf</span><span class="s2">(</span><span class="s1">searchTerm</span><span class="s2">) != -</span><span class="s5">1</span><span class="s2">)</span>
+            <span class="s2">{</span>
+                <span class="s4">//add the Movie objest to the results list</span>
+                <span class="s1">results</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">movies</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">));</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s4">// sort the results by title</span>
+        <span class="s1">sortResults</span><span class="s2">(</span><span class="s1">results</span><span class="s2">);</span>
+
+        <span class="s4">// now, display them all to the user</span>
+        <span class="s0">for </span><span class="s2">(</span><span class="s0">int </span><span class="s1">i </span><span class="s2">= </span><span class="s5">0</span><span class="s2">; </span><span class="s1">i </span><span class="s2">&lt; </span><span class="s1">results</span><span class="s2">.</span><span class="s1">size</span><span class="s2">(); </span><span class="s1">i</span><span class="s2">++)</span>
+        <span class="s2">{</span>
+            <span class="s1">String keyword </span><span class="s2">= </span><span class="s1">results</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">i</span><span class="s2">).</span><span class="s1">getTitle</span><span class="s2">();</span>
+
+            <span class="s4">// this will print index 0 as choice 1 in the results list; better for user!</span>
+            <span class="s0">int </span><span class="s1">choiceNum </span><span class="s2">= </span><span class="s1">i </span><span class="s2">+ </span><span class="s5">1</span><span class="s2">;</span>
+
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;&quot; </span><span class="s2">+ </span><span class="s1">choiceNum </span><span class="s2">+ </span><span class="s3">&quot;. &quot; </span><span class="s2">+ </span><span class="s1">keyword</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Which movie would you like to learn more about?&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s3">&quot;Enter number: &quot;</span><span class="s2">);</span>
+
+        <span class="s0">int </span><span class="s1">choice </span><span class="s2">= </span><span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextInt</span><span class="s2">();</span>
+        <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+
+        <span class="s1">Movie selectedMovie </span><span class="s2">= </span><span class="s1">results</span><span class="s2">.</span><span class="s1">get</span><span class="s2">(</span><span class="s1">choice </span><span class="s2">- </span><span class="s5">1</span><span class="s2">);</span>
+
+        <span class="s1">displayMovieInfo</span><span class="s2">(</span><span class="s1">selectedMovie</span><span class="s2">);</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;</span><span class="s0">\n </span><span class="s3">** Press Enter to Return to Main Menu **&quot;</span><span class="s2">);</span>
+        <span class="s1">scanner</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">listGenres</span><span class="s2">()</span>
+    <span class="s2">{</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">listHighestRated</span><span class="s2">()</span>
+    <span class="s2">{</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">listHighestRevenue</span><span class="s2">()</span>
+    <span class="s2">{</span>
+
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">importMovieList</span><span class="s2">(</span><span class="s1">String fileName</span><span class="s2">)</span>
+    <span class="s2">{</span>
+        <span class="s0">try</span>
+        <span class="s2">{</span>
+            <span class="s1">FileReader fileReader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">FileReader</span><span class="s2">(</span><span class="s1">fileName</span><span class="s2">);</span>
+            <span class="s1">BufferedReader bufferedReader </span><span class="s2">= </span><span class="s0">new </span><span class="s1">BufferedReader</span><span class="s2">(</span><span class="s1">fileReader</span><span class="s2">);</span>
+            <span class="s1">String line </span><span class="s2">= </span><span class="s1">bufferedReader</span><span class="s2">.</span><span class="s1">readLine</span><span class="s2">();</span>
+
+            <span class="s1">movies </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;</span><span class="s1">Movie</span><span class="s2">&gt;();</span>
+
+            <span class="s0">while </span><span class="s2">((</span><span class="s1">line </span><span class="s2">= </span><span class="s1">bufferedReader</span><span class="s2">.</span><span class="s1">readLine</span><span class="s2">()) != </span><span class="s0">null</span><span class="s2">)</span>
+            <span class="s2">{</span>
+                <span class="s1">String</span><span class="s2">[] </span><span class="s1">movieFromCSV </span><span class="s2">= </span><span class="s1">line</span><span class="s2">.</span><span class="s1">split</span><span class="s2">(</span><span class="s3">&quot;,&quot;</span><span class="s2">);</span>
+
+                <span class="s1">String title </span><span class="s2">= </span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">0</span><span class="s2">];</span>
+                <span class="s1">String cast </span><span class="s2">= </span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">1</span><span class="s2">];</span>
+                <span class="s1">String director </span><span class="s2">= </span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">2</span><span class="s2">];</span>
+                <span class="s1">String tagline </span><span class="s2">= </span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">3</span><span class="s2">];</span>
+                <span class="s1">String keywords </span><span class="s2">= </span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">4</span><span class="s2">];</span>
+                <span class="s1">String overview </span><span class="s2">= </span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">5</span><span class="s2">];</span>
+                <span class="s0">int </span><span class="s1">runtime </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">6</span><span class="s2">]);</span>
+                <span class="s1">String genres </span><span class="s2">= </span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">7</span><span class="s2">];</span>
+                <span class="s0">double </span><span class="s1">userRating </span><span class="s2">= </span><span class="s1">Double</span><span class="s2">.</span><span class="s1">parseDouble</span><span class="s2">(</span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">8</span><span class="s2">]);</span>
+                <span class="s0">int </span><span class="s1">year </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">9</span><span class="s2">]);</span>
+                <span class="s0">int </span><span class="s1">revenue </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">parseInt</span><span class="s2">(</span><span class="s1">movieFromCSV</span><span class="s2">[</span><span class="s5">10</span><span class="s2">]);</span>
+
+                <span class="s1">Movie nextMovie </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Movie</span><span class="s2">(</span><span class="s1">title</span><span class="s2">, </span><span class="s1">cast</span><span class="s2">, </span><span class="s1">director</span><span class="s2">, </span><span class="s1">tagline</span><span class="s2">, </span><span class="s1">keywords</span><span class="s2">, </span><span class="s1">overview</span><span class="s2">, </span><span class="s1">runtime</span><span class="s2">, </span><span class="s1">genres</span><span class="s2">, </span><span class="s1">userRating</span><span class="s2">, </span><span class="s1">year</span><span class="s2">, </span><span class="s1">revenue</span><span class="s2">);</span>
+                <span class="s1">movies</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">nextMovie</span><span class="s2">);</span>
+            <span class="s2">}</span>
+            <span class="s1">bufferedReader</span><span class="s2">.</span><span class="s1">close</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">catch</span><span class="s2">(</span><span class="s1">IOException exception</span><span class="s2">)</span>
+        <span class="s2">{</span>
+            <span class="s4">// Print out the exception that occurred</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s3">&quot;Unable to access &quot; </span><span class="s2">+ </span><span class="s1">exception</span><span class="s2">.</span><span class="s1">getMessage</span><span class="s2">());</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span></pre>
+</body>
+</html>

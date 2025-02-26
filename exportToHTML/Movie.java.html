@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>Movie.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #5f826b; font-style: italic;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Movie.java</font>
+</center></td></tr></table>
+<pre><span class="s0">/**</span>
+ <span class="s0">* Class that represents a single Movie object</span>
+ <span class="s0">*/</span>
+<span class="s2">public class </span><span class="s1">Movie</span>
+<span class="s3">{</span>
+    <span class="s2">private </span><span class="s1">String title</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">String cast</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">String director</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">String tagline</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">String keywords</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">String overview</span><span class="s3">;</span>
+    <span class="s2">private int </span><span class="s1">runtime</span><span class="s3">;</span>
+    <span class="s2">private </span><span class="s1">String genres</span><span class="s3">;</span>
+    <span class="s2">private double </span><span class="s1">userRating</span><span class="s3">;</span>
+    <span class="s2">private int </span><span class="s1">year</span><span class="s3">;</span>
+    <span class="s2">private int </span><span class="s1">revenue</span><span class="s3">;</span>
+
+    <span class="s2">public </span><span class="s1">Movie</span><span class="s3">(</span><span class="s1">String title</span><span class="s3">, </span><span class="s1">String cast</span><span class="s3">, </span><span class="s1">String director</span><span class="s3">, </span><span class="s1">String tagline</span><span class="s3">,</span>
+                 <span class="s1">String keywords</span><span class="s3">, </span><span class="s1">String overview</span><span class="s3">, </span><span class="s2">int </span><span class="s1">runtime</span><span class="s3">, </span><span class="s1">String genres</span><span class="s3">,</span>
+                 <span class="s2">double </span><span class="s1">userRating</span><span class="s3">, </span><span class="s2">int </span><span class="s1">year</span><span class="s3">, </span><span class="s2">int </span><span class="s1">revenue</span><span class="s3">)</span>
+    <span class="s3">{</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">title </span><span class="s3">= </span><span class="s1">title</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">cast </span><span class="s3">= </span><span class="s1">cast</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">director </span><span class="s3">= </span><span class="s1">director</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">tagline </span><span class="s3">= </span><span class="s1">tagline</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">keywords </span><span class="s3">= </span><span class="s1">keywords</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">overview </span><span class="s3">= </span><span class="s1">overview</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">runtime </span><span class="s3">= </span><span class="s1">runtime</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">genres </span><span class="s3">= </span><span class="s1">genres</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">userRating </span><span class="s3">= </span><span class="s1">userRating</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">year </span><span class="s3">= </span><span class="s1">year</span><span class="s3">;</span>
+        <span class="s2">this</span><span class="s3">.</span><span class="s1">revenue </span><span class="s3">= </span><span class="s1">revenue</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public </span><span class="s1">String getTitle</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">title</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public </span><span class="s1">String getCast</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">cast</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public </span><span class="s1">String getDirector</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">director</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public </span><span class="s1">String getTagline</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">tagline</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public </span><span class="s1">String getKeywords</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">keywords</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public </span><span class="s1">String getOverview</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">overview</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public int </span><span class="s1">getRuntime</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">runtime</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public </span><span class="s1">String getGenres</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">genres</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public double </span><span class="s1">getUserRating</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">userRating</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public int </span><span class="s1">getYear</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">year</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public int </span><span class="s1">getRevenue</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s1">revenue</span><span class="s3">;</span>
+    <span class="s3">}</span>
+
+    <span class="s2">public </span><span class="s1">String toString</span><span class="s3">()</span>
+    <span class="s3">{</span>
+        <span class="s2">return </span><span class="s4">&quot;Title: &quot; </span><span class="s3">+ </span><span class="s1">title </span><span class="s3">+ </span><span class="s4">&quot;, Tagline: &quot; </span><span class="s3">+ </span><span class="s1">tagline</span><span class="s3">;</span>
+    <span class="s3">}</span>
+<span class="s3">}</span></pre>
+</body>
+</html>
