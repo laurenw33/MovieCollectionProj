@@ -269,7 +269,7 @@ public class MovieCollection
 
             if (movieKeyword.indexOf(searchTerm) != -1)
             {
-                //add the Movie objest to the results list
+                //add the Movie object to the results list
                 results.add(movies.get(i));
             }
         }
@@ -277,12 +277,11 @@ public class MovieCollection
         // sort the results by title
         sortResults(results);
 
-        // now, display them all to the user
         for (int i = 0; i < results.size(); i++)
         {
             String keyword = results.get(i).getTitle();
 
-            // this will print index 0 as choice 1 in the results list; better for user!
+            // this will print index 0 as choice 1 in the results list
             int choiceNum = i + 1;
 
             System.out.println("" + choiceNum + ". " + keyword);
